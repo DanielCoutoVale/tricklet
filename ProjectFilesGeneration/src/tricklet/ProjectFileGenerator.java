@@ -1,6 +1,7 @@
 package tricklet;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -87,12 +89,80 @@ public class ProjectFileGenerator {
 		return map;
 	}
 
-	public final void generate() {
+	public final void generate() throws IOException {
 		List<String> participantIdList = new ArrayList<String>(participantMap.keySet());
 		Collections.sort(participantIdList);
+		File participantsDirectory = new File(directory, "Participants");
+		makeDirectory(participantsDirectory);
 		for (String participantId : participantIdList) {
-			System.out.println(participantId);
+			File participantDirectory = new File(participantsDirectory, participantId);
+			makeDirectory(participantDirectory);
+			fillDirectory(participantDirectory, participantId);
 		}
+	}
+
+	private final void makeDirectory(File directory) {
+		if (directory.isFile()) {
+			directory.delete();
+		}
+		if (!directory.isDirectory()) {
+			directory.mkdir();
+		}
+	}
+
+	private final void fillDirectory(File directory, String participantId) throws IOException {
+		List<Element> textList = getTextList(participantId);
+		int i = 1;
+		for (Element textElm : textList) {
+			String textId = textElm.getAttribute("id");
+			String projectName = participantId + "-" + (i++) + "-" + textId + ".project";  
+			File projectFile = new File(directory, projectName);
+			if (projectFile.exists()) {
+				projectFile.delete();
+			}
+			projectFile.createNewFile();
+		}
+	}
+
+	private final List<Element> getTextList(String participantId) {
+		Element participantElm = participantMap.get(participantId);
+		String setupId = participantElm.getAttribute("setup");
+		Element setupElm = setupMap.get(setupId);
+		List<Element> textList = new ArrayList<Element>();
+		for (Element textListElm : getChildValues(setupElm, "text-list", textListMap)) {
+			textList.addAll(getChildValues(textListElm, "text", textMap));
+		}
+		return textList;
+	}
+
+	private final List<Element> getChildValues(Element elm, String nodeName, Map<String, Element> map) {
+		List<String> indexList = getChildIndices(elm, nodeName);
+		List<Element> elmList = new ArrayList<Element>();
+		for (String index : indexList) {
+			elmList.add(map.get(index));
+		}
+		return elmList;
+	}
+
+	private final List<String> getChildIndices(Element elm, String nodeName) {
+		List<Element> childElmList = getChildren(elm, nodeName);
+		List<String> childIndexList = new ArrayList<String>();
+		for (Element childElm : childElmList) {
+			childIndexList.add(childElm.getAttribute("index"));
+		}
+		return childIndexList;
+	}
+
+	private final List<Element> getChildren(Element elm, String nodeName) {
+		List<Element> childElmList = new ArrayList<Element>();
+		NodeList childNodeList = elm.getChildNodes();
+		for (int i = 0; i < childNodeList.getLength(); i++) {
+			Node childNode = childNodeList.item(i);
+			if (childNode instanceof Element && childNode.getNodeName().equals(nodeName)) {
+				childElmList.add((Element)childNode);
+			}
+		}
+		return childElmList;
 	}
 
 }

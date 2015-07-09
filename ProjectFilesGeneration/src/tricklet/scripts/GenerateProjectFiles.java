@@ -57,7 +57,7 @@ public class GenerateProjectFiles {
 		try {
 			ProjectFileGenerator generator = new ProjectFileGenerator(file.getParentFile(), document);
 			generator.generate();
-		} catch (XPathExpressionException e) {
+		} catch (XPathExpressionException | IOException e) {
 			e.printStackTrace();
 			printUsage();
 			System.exit(-1);
