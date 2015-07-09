@@ -43,6 +43,7 @@ public class GenerateProjectFiles {
 			System.exit(-1);
 			return;
 		}
+		System.out.println(file.getAbsolutePath());
 
 		// Create document
 		Document document;
