@@ -3,15 +3,15 @@ package tricklet.scripts;
 import java.io.File;
 import java.io.IOException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import tricklet.ProjectFileGenerator;
+import tricklet.utils.DOMUtils;
 
 /**
  * Generates project files from a set of text files
@@ -47,7 +47,7 @@ public class GenerateProjectFiles {
 		// Create document
 		Document document;
 		try {
-			document = loadDocument(file);
+			document = DOMUtils.loadDocument(file);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 			printUsage();
@@ -57,7 +57,7 @@ public class GenerateProjectFiles {
 		try {
 			ProjectFileGenerator generator = new ProjectFileGenerator(file.getParentFile(), document);
 			generator.generate();
-		} catch (XPathExpressionException | IOException e) {
+		} catch (XPathExpressionException | IOException | SAXException | ParserConfigurationException | TransformerException e) {
 			e.printStackTrace();
 			printUsage();
 			System.exit(-1);
@@ -65,13 +65,7 @@ public class GenerateProjectFiles {
 		}
 	}
 
-	private final static Document loadDocument(File file) throws ParserConfigurationException,
-			SAXException, IOException {
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		Document document = documentBuilder.parse(file);
-		return document;
-	}
+	
 
 	private final static void printUsage() {
 		System.out.println("Usage: java -jar generate-project-files.jar [experiment-file-path]");

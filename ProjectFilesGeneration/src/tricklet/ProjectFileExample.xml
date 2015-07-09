@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileName>C:\Users\Arndt Heilmann\sciebo\Eye-tracking\Baseline experiment\Main Experiment\Texts\sampleA1.project</FileName>
+  <Description>example project description</Description>
+  <versionString />
+  <useSourceText>true</useSourceText>
+  <promptSubjectName>false</promptSubjectName>
+  <useExtendedTranslations>false</useExtendedTranslations>
+  <showTimer>false</showTimer>
+  <maxWindow>false</maxWindow>
+  <offlineGWM>false</offlineGWM>
+  <fullScreen>false</fullScreen>
+  <lockWindows>false</lockWindows>
+  <Plugins>
+    <Key_Logger />
+  </Plugins>
+  <Interface>
+    <Standard>
+      <pluginDependances />
+      <Import2006Flag>false</Import2006Flag>
+      <Settings>
+        <TargetBackgroundColor RGB="-1" />
+        <SourceBackgroundColor RGB="-1" />
+        <lineHeight source="1" target="1" />
+        <SourceText>{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 Courier New;}}
+\viewkind4\uc1\pard\lang1033\f0\fs30 
+The flora and fauna of the Ice Age differ dramatically from that of today. A new study focusing on the \par\par
+birds of the Ice Age has shed light on the long-term response of birds to climate change. The research \par\par
+shows that the population of British birds in the Ice Age was larger suggesting the richness of the \par\par
+environment at this time. John Stewart from Bournemouth University and researcher Roger Jacobi found out \par\par
+that there was an unusual mix of birds in one space and a distinct dawn chorus. The mixtures of birds that \par\par
+lived together were different from anywhere in the world today. Birds exotic to Britain, such as species \par\par
+normally expected in the tundra to the north, the Mediterranean to the South or the Eastern steppes lived \par\par
+together with birds expected in the region today. John Stewart stated: \'93It is clear that the change of \par\par
+prehistoric birds in Britain resembles that of mammals. It also signifies that the dawn chorus witnessed \par\par
+by the Neanderthals at that time and place has no parallels anywhere today.\'94}
+</SourceText>
+        <TargetText>{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 Courier New;}}
+\viewkind4\uc1\pard\sl180\slmult1\f0\fs30\par
+}
+</TargetText>
+        <SourceTextUTF8>..........................................................................................................</SourceTextUTF8>
+        <TargetTextUTF8 />
+        <TranslationWindow X="75" Y="0" Width="1300" Height="912" Split="495" STO="True" VHO="Horizontal" />
+      </Settings>
+      <SourceField X="5" Y="27" Width="1284" Height="495" />
+      <TargetField X="5" Y="27" Width="1284" Height="351" />
+    </Standard>
+  </Interface>
+</Project>
