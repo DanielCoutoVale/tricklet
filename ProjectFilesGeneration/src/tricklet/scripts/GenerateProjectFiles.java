@@ -6,9 +6,12 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import tricklet.ProjectFileGenerator;
 
 /**
  * Generates project files from a set of text files
@@ -46,11 +49,20 @@ public class GenerateProjectFiles {
 		try {
 			document = loadDocument(file);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
 			printUsage();
 			System.exit(-1);
 			return;
 		}
-		document.getAttributes();
+		try {
+			ProjectFileGenerator generator = new ProjectFileGenerator(file.getParentFile(), document);
+			generator.generate();
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+			printUsage();
+			System.exit(-1);
+			return;
+		}
 	}
 
 	private final static Document loadDocument(File file) throws ParserConfigurationException,
