@@ -171,6 +171,7 @@ public class ProjectFileGenerator {
 	private final void fillProjectFile(File projectFile, File textFile) throws SAXException, IOException, ParserConfigurationException, TransformerException {
 		String textUtf8 = loadTextUtf8(textFile);
 		String text = makeText(textUtf8);
+		textUtf8 = textUtf8.replace("~", " ");
 		InputStream resource = ProjectFileGenerator.class.getResourceAsStream("ProjectFileExample.xml");
 		Document document = DOMUtils.loadDocument(resource);
 		IElement elm = new IElement(document.getDocumentElement());
@@ -199,7 +200,7 @@ public class ProjectFileGenerator {
 			buffer.append("\\par\\par\n");
 		}
 		textUtf8 = buffer.toString();
-		String text = rtfPrefix + textUtf8.replace("‘", "\\'91").replace("’", "\\'92").replace("“", "\\'93").replace("”", "\\'94") + rtfSuffix;
+		String text = rtfPrefix + textUtf8.replace("‘", "\\'91").replace("’", "\\'92").replace("“", "\\'93").replace("”", "\\'94").replace("~", " ") + rtfSuffix;
 		return text;
 	}
 
