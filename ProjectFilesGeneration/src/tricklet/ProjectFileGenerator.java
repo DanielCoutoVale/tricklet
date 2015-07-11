@@ -37,7 +37,7 @@ public class ProjectFileGenerator {
 	/**
 	 * RTF Prefix
 	 */
-	private final static String rtfPrefix = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1031{\\fonttbl{\\f0\\fnil\\fcharset0 Courier New;}}\n\\viewkind4\\uc1\\pard\\lang1033\\f0\\fs30 \n";
+	private final static String rtfPrefix = "{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1031{\\fonttbl{\\f0\\fnil\\fcharset0 Courier New;}}\n\\viewkind4\\uc1\\pard\\lang1033\\f0\\fs30 ";
 
 	/**
 	 * RTF Suffix
